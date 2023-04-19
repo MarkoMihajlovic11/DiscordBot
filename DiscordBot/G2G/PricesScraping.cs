@@ -2,24 +2,27 @@
 using DiscordBot.Models;
 using Newtonsoft.Json;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace DiscordBot.G2G
 {
-    public  class PricesScraping
+    public class PricesScraping
     {
         private static string _serverName;
         private static bool _haveOutput = false;
         private static StringBuilder _content = new();
+
+        public const string _oneThousand = "1k";
+        public const string _oneGold = "1 gold";
         public PricesScraping(string serverName)
         {
             _serverName = serverName;
         }
+
+        /// <summary>
+        /// Method for scraping wow prices from g2g.com
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> ScrapeWoWPrices()
         {
             try
@@ -28,30 +31,34 @@ namespace DiscordBot.G2G
                 _content.Append("```");
 
                 List<Task> tasks = new();
-                tasks.Add(ShadowladnsScraping());
-                tasks.Add(TBCScraping());
+
+                //Scrape shadowlands
+                tasks.Add(Scrape(Constants.ShadowladnsGameId, _serverName, _oneThousand));
+
+                //Scrape TBC
+                tasks.Add(Scrape(Constants.TBCGameId, _serverName, _oneGold));
 
                 await Task.WhenAll(tasks);
-                _content.Append("```");            
+                _content.Append("```");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);           
+                Console.WriteLine(ex.Message);
             }
 
-            if(_haveOutput)
+            if (_haveOutput)
                 return _content.ToString();
             else
                 return $"'{_serverName}' can not be found. Please check the server name (spaces, special characters etc).";
 
         }
-        private static async Task ShadowladnsScraping()
+        private static async Task Scrape(string gameId, string serverName, string currency)
         {
             try
             {
-                RestResponse response = CommonMethods.G2GGetRequest(Constants.ShadowladnsGameId);
+                RestResponse response = CommonMethods.G2GGetRequest(Constants.ShadowladnsGameId, _serverName);
 
-                GetResponseMsg(response, "1k");
+                GetResponseMsg(response, currency);
             }
             catch (Exception ex)
             {
@@ -59,21 +66,7 @@ namespace DiscordBot.G2G
             }
         }
 
-
-        public static async Task TBCScraping()
-        {
-            try
-            {
-                RestResponse response = CommonMethods.G2GGetRequest(Constants.TBCGameId);
-
-                GetResponseMsg(response, "1 gold");
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
-        private static void GetResponseMsg(RestResponse response, string gold)
+        private static void GetResponseMsg(RestResponse response, string currency)
         {
             var jsonDeserialized = JsonConvert.DeserializeObject<G2GResponse>(response.Content);
 
@@ -81,7 +74,7 @@ namespace DiscordBot.G2G
             {
                 foreach (var item in jsonDeserialized.Payload.Results)
                 {
-                    _content.AppendLine($"{item.Title} - {item.Converted_Unit_Price - (item.Converted_Unit_Price * 25 / 100)}$ / {gold}");
+                    _content.AppendLine($"{item.Title} - {item.Converted_Unit_Price - (item.Converted_Unit_Price * 25 / 100)}$ / {currency}");
                     _haveOutput = true;
                 }
             }

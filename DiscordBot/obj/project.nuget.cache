@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xa4+9OVYdtrxtxohzGZ34xtZF2eGuoajICopdA23gN8kRFuEZ6S8IdnEMxCvjVkC+romEcRpxqYIaG/zyPCFQw==",
+  "dgSpecHash": "1pu0EeOWJzkrVvQwjxvT1Ofbsfyjid8+cM5WybTsP+AXLgZbBqdjo7IRRjOArYNU9QtM52xuB6+MsEkd+Nadqg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marko\\Desktop\\DiscordBot\\DiscordBot\\DiscordBot.csproj",
+  "projectFilePath": "C:\\Users\\marko\\Documents\\GitHub\\DiscordBot\\DiscordBot\\DiscordBot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marko\\.nuget\\packages\\discord.net\\3.7.2\\discord.net.3.7.2.nupkg.sha512",
     "C:\\Users\\marko\\.nuget\\packages\\discord.net.commands\\3.7.2\\discord.net.commands.3.7.2.nupkg.sha512",

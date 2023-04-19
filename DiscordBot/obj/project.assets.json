@@ -629,11 +629,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marko\\Desktop\\DiscordBot\\DiscordBot\\DiscordBot.csproj",
+      "projectUniqueName": "C:\\Users\\marko\\Documents\\GitHub\\DiscordBot\\DiscordBot\\DiscordBot.csproj",
       "projectName": "DiscordBot",
-      "projectPath": "C:\\Users\\marko\\Desktop\\DiscordBot\\DiscordBot\\DiscordBot.csproj",
+      "projectPath": "C:\\Users\\marko\\Documents\\GitHub\\DiscordBot\\DiscordBot\\DiscordBot.csproj",
       "packagesPath": "C:\\Users\\marko\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marko\\Desktop\\DiscordBot\\DiscordBot\\obj\\",
+      "outputPath": "C:\\Users\\marko\\Documents\\GitHub\\DiscordBot\\DiscordBot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

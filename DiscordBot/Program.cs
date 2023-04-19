@@ -1,11 +1,11 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using DiscordBot.G2G;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-class Program {
+class Program
+{
     static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
 
     private DiscordSocketClient _client;
