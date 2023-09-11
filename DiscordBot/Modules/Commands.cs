@@ -9,41 +9,22 @@ namespace DiscordBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
-        /// <summary>
-        /// !ratewow command
-        /// </summary>
-        /// <param name="serverName">Server name</param>
-        /// <returns></returns>
-        [Command("ratewow")]
-        public async Task RateWow([Remainder] string serverName)
-        {
-            await ScrapePricesAsyncWow(serverName);
-        }
 
         /// <summary>
-        /// !pricewow command
+        /// !pricewow or !ratewow command
         /// </summary>
         /// <param name="serverName">Server name</param>
         /// <returns></returns>
         [Command("pricewow")]
+        [Alias("ratewow")]
         public async Task PriceWow([Remainder] string serverName)
-        {
-            await ScrapePricesAsyncWow(serverName);
-        }
-
-        /// <summary>
-        /// Mthod for scraping wow prices from g2g.com
-        /// </summary>
-        /// <param name="serverName"></param>
-        /// <returns></returns>
-        private async Task ScrapePricesAsyncWow(string serverName)
         {
             try
             {
                 List<Task<string>> tasks = new()
                 {
-                    PricesScraping.ScrapePricesAsync(Constants.ShadowladnsGameId, serverName, Constants.OneThousandGolds),
-                    PricesScraping.ScrapePricesAsync(Constants.TBCGameId, serverName, Constants.OneGold)
+                    PriceScraping.ScrapePricesAsync(Constants.ShadowladnsGameId, serverName, Constants.OneThousandGolds),
+                    PriceScraping.ScrapePricesAsync(Constants.TBCGameId, serverName, Constants.OneGold)
                 };
 
                 await Task.WhenAll(tasks);

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DiscordBot.G2G
 {
-    public static class PricesScraping
+    public static class PriceScraping
     {
         /// <summary>
         /// Method for scraping prices from g2g.com
@@ -36,7 +36,7 @@ namespace DiscordBot.G2G
             }
 
 
-                return content.ToString();
+            return content.ToString();
         }
 
 
