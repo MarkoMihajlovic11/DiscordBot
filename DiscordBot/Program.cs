@@ -1,8 +1,10 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Microsoft.Extensions.Configuration.Json;
 
 class Program
 {
@@ -22,7 +24,10 @@ class Program
             .AddSingleton(_commands)
             .BuildServiceProvider();
 
-        string token = File.ReadAllText("token.txt");
+        var configuration = new ConfigurationBuilder()
+           .AddJsonFile("appsettings.json")
+           .Build();
+        var token = configuration.GetSection("appsettings:token").Value;
 
         _client.Log += _client_Log;
 
