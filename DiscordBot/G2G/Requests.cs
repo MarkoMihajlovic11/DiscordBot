@@ -1,8 +1,8 @@
 ﻿using RestSharp;
 
-namespace DiscordBot.Common
+namespace DiscordBot.G2G
 {
-    public static class CommonMethods
+    public static class Requests
     {
         /// <summary>
         /// Finds lowest prices on g2g.com based on game id and server name
@@ -10,7 +10,7 @@ namespace DiscordBot.Common
         /// <param name="gameId">aGame id</param>
         /// <param name="serverName">Server name</param>
         /// <returns></returns>
-        public static RestResponse G2GGetRequest(string gameId, string serverName)
+        public static async Task<RestResponse> G2GGetRequest(string gameId, string serverName)
         {
             var client = new RestClient($"https://sls.g2g.com/offer/search?service_id=lgc_service_1&brand_id=lgc_game_{gameId}&q={serverName}&sort=lowest_price&page_size=48&currency=USD&country=RS");
             var request = new RestRequest($"https://sls.g2g.com/offer/search?service_id=lgc_service_1&brand_id=lgc_game_{gameId}&q={serverName}&sort=lowest_price&page_size=48&currency=USD&country=RS", Method.Get);
@@ -27,7 +27,7 @@ namespace DiscordBot.Common
             request.AddHeader("sec-fetch-mode", "cors");
             request.AddHeader("sec-fetch-site", "same-site");
             request.AddHeader("x-api-key", "0DWATzuevY8r91rPCySTl91p2Odp6itK23sOskIX");
-            RestResponse response = client.Execute(request);
+            var response = await client.ExecuteAsync(request);
             return response;
         }
     }

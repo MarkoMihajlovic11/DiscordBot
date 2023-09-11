@@ -4,11 +4,13 @@ using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Microsoft.Extensions.Configuration.Json;
 
 class Program
 {
-    static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
+    static void Main(string[] args) => new Program()
+        .RunBotAsync()
+        .GetAwaiter()
+        .GetResult();
 
     private DiscordSocketClient _client;
     private CommandService _commands;
@@ -57,7 +59,7 @@ class Program
     {
         var message = arg as SocketUserMessage;
         var context = new SocketCommandContext(_client, message);
-        if (message.Author.IsBot) return;
+        if (message!.Author.IsBot) return;
 
         int argPos = 0;
         if (message.HasStringPrefix("!", ref argPos))
