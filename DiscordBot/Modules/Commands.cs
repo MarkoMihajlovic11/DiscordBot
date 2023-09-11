@@ -26,7 +26,7 @@ namespace DiscordBot.Modules
         /// <param name="serverName">Server name</param>
         /// <returns></returns>
         [Command("pricewow")]
-        public async Task Price([Remainder] string serverName)
+        public async Task PriceWow([Remainder] string serverName)
         {
             await ScrapePricesAsyncWow(serverName);
         }
